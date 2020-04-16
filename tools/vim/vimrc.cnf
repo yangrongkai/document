@@ -1,0 +1,528 @@
+" base configuration
+syntax on
+set number
+set norelativenumber
+set cursorline
+set wrap
+set showcmd
+set wildmenu
+
+set hlsearch
+exec "nohlsearch"
+set incsearch
+set ignorecase
+set smartcase
+
+" set mouse=a
+set encoding=utf-8
+set noswapfile
+
+" let &t_ut=''
+" set expandtab
+" set tabstop=2
+" set shiftwidth=2
+" set softtabstop=2
+" set list
+" set listchars=tab:▸\ ,trail:▫
+" set scrolloff=5
+" set tw=0
+" set indentexpr=
+" set backspace=indent,eol,start
+" set foldmethod=indent
+" set foldlevel=99
+" let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+" let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+" let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" set laststatus=2
+" set autochdir
+" au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" modify keyboard keys
+noremap = nzz
+noremap - Nzz
+noremap <LEADER><CR> :nohlsearch<CR>
+noremap sf :find .<CR>
+
+noremap H 5h
+noremap J 5j
+noremap K 5k
+noremap L 5l
+
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+map sr :set splitright<CR>:vsplit<CR>
+map sl :set nosplitright<CR>:vsplit<CR>
+map su :set nosplitbelow<CR>:split<CR>
+map sd :set splitbelow<CR>:split<CR>
+
+map <up> :resize +5<CR>
+map <down> :resize -5<CR>
+map <left> :vertical resize-5<CR>
+map <right> :vertical resize+5<CR>
+
+map tc :tabe<CR>
+map tp :-tabnext<CR>
+map tn :+tabnext<CR>
+
+map sv <C-w>t<C-w>H
+map sh <C-w>t<C-w>K
+
+" map <F9> :set paste<CR>
+" map <F10> :set nopaste<CR>
+
+map s <nop>
+map S :w<CR>
+map Q :q<CR>
+map ; :
+map R :source $MYVIMRC<CR>
+
+
+" file characters to format
+set nocompatible
+filetype off
+
+" filetype on
+" filetype indent on
+" filetype plugin on
+" filetype plugin indent on
+
+
+" loading plugins
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'Lokaltog/vim-powerline'
+Plugin 'christoomey/vim-tmux-navigator'
+
+
+" filesystem
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'kien/ctrlp.vim' 
+Plugin 'tacahiroy/ctrlp-funky' 
+
+
+" Taglist
+Plugin 'majutsushi/tagbar', { 'on': 'TagbarOpenAutoClose' }
+
+
+" Undo Tree
+Plugin 'mbbill/undotree'
+
+
+" HTML, CSS, JavaScript, PHP, JSON, etc.
+Plugin 'elzr/vim-json'
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
+Plugin 'gko/vim-coloresque', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+Plugin 'pangloss/vim-javascript', { 'for' :['javascript', 'vim-plug'] }
+Plugin 'mattn/emmet-vim'
+
+
+" python sytax checker
+Plugin 'nvie/vim-flake8'
+Plugin 'vim-scripts/Pydiction'
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'scrooloose/syntastic'
+
+
+" auto-completion stuff
+" Plugin 'klen/python-mode'
+Plugin 'Valloric/YouCompleteMe'
+" Plugin 'klen/rope-vim'
+" Plugin 'davidhalter/jedi-vim'
+" Plugin 'ervandew/supertab'
+
+
+" Other visual enhancement
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'itchyny/vim-cursorword'
+
+
+" Git
+Plugin 'rhysd/conflict-marker.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'mhinz/vim-signify'
+Plugin 'gisphm/vim-gitignore', { 'for': ['gitignore', 'vim-plug'] }
+
+
+" code folding
+Plugin 'tmhedberg/SimpylFold'
+
+
+" Colors!!!
+Plugin 'jnurmine/Zenburn'
+Plugin 'altercation/vim-colors-solarized'
+
+
+" PEP format
+Plugin 'Vimjas/vim-python-pep8-indent'
+Plugin 'tell-k/vim-autopep8'
+Plugin 'w0rp/ale'
+
+
+" vim-markdown
+" Plugin 'isnowfy/python-vim-instant-markdown'
+" Plugin 'jtratner/vim-flavored-markdown'
+" Plugin 'suan/vim-instant-markdown'
+" Plugin 'plasticboy/vim-markdown'
+Plugin 'iamcco/markdown-preview.vim'
+Plugin 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
+Plugin 'vimwiki/vimwiki'
+
+
+" Bookmarks
+Plugin 'kshenoy/vim-signature'
+
+
+
+" editorconfig
+Plugin 'editorconfig/editorconfig-vim'
+
+
+" codes navigation
+Plugin 'Tagbar'
+
+
+" brackets config
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'surround.vim'
+
+
+" Other useful utilities
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'junegunn/goyo.vim' " distraction free writing mode
+Plugin 'tpope/vim-surround' " type ysks' to wrap the word with '' or type cs'` to change 'word' to `word`
+Plugin 'godlygeek/tabular' " type ;Tabularize /= to align the =
+Plugin 'gcmt/wildfire.vim' " in Visual mode, type i' to select all text in '', or type i) i] i} ip
+Plugin 'scrooloose/nerdcommenter' " in <space>cc to comment a line
+
+
+" Dependencies
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'kana/vim-textobj-user'
+Plugin 'fadein/vim-FIGlet'
+
+" plantuml
+Plugin 'tyru/open-browser.vim'
+Plugin 'aklt/plantuml-syntax'
+
+call vundle#end()
+
+filetype plugin indent on    " enables filetype detection
+let g:SimpylFold_docstring_preview = 1
+
+
+"custom keys
+let mapleader=" "
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+call togglebg#map("<F3>")
+colorscheme zenburn
+set guifont=Monaco:h14
+
+
+
+" ================================================================
+" *             ctrlp plugins paramters                           *
+" ================================================================
+let g:ctrlp_funky_syntax_highlight = 1
+let g:ctrlp_extensions = ['funky']
+" ------------------------- end -----------------------------------
+
+
+
+" ================================================================
+" *             undotree plugins paramters                           *
+" ================================================================
+let g:undotree_DiffAutoOpen = 0
+map M :UndotreeToggle<CR>
+" ------------------------- end -----------------------------------
+
+
+
+" ================================================================
+" *             vim-signiture plugins paramters                  *
+" ================================================================
+let g:SignatureMap = {
+        \ 'Leader'             :  "m",
+        \ 'PlaceNextMark'      :  "m,",
+        \ 'ToggleMarkAtLine'   :  "m.",
+        \ 'PurgeMarksAtLine'   :  "dm-",
+        \ 'DeleteMark'         :  "dm",
+        \ 'PurgeMarks'         :  "dm/",
+        \ 'PurgeMarkers'       :  "dm?",
+        \ 'GotoNextLineAlpha'  :  "m<LEADER>",
+        \ 'GotoPrevLineAlpha'  :  "",
+        \ 'GotoNextSpotAlpha'  :  "m<LEADER>",
+        \ 'GotoPrevSpotAlpha'  :  "",
+        \ 'GotoNextLineByPos'  :  "",
+        \ 'GotoPrevLineByPos'  :  "",
+        \ 'GotoNextSpotByPos'  :  "mn",
+        \ 'GotoPrevSpotByPos'  :  "mp",
+        \ 'GotoNextMarker'     :  "",
+        \ 'GotoPrevMarker'     :  "",
+        \ 'GotoNextMarkerAny'  :  "",
+        \ 'GotoPrevMarkerAny'  :  "",
+        \ 'ListLocalMarks'     :  "m/",
+        \ 'ListLocalMarkers'   :  "m?"
+        \ }
+" ------------------------- end -----------------------------------
+
+
+" ================================================================
+" *             Goyo plugins paramters                           *
+" ================================================================
+map <LEADER>gy :Goyo<CR>
+" ------------------------- end -----------------------------------
+
+
+" ================================================================
+" *             vim-indent-guide plugins paramters               *
+" ================================================================
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_color_change_percent = 1
+silent! unmap <LEADER>ig
+autocmd WinEnter * silent! unmap <LEADER>ig
+" ------------------------- end -----------------------------------
+
+
+" ================================================================
+" *             vim-table-mode plugins paramters                 *
+" ================================================================
+map <LEADER>tm :TableModeToggle<CR>
+" ------------------------- end -----------------------------------
+
+
+" ================================================================
+" *             MarkdownPreviewd plugins paramters               *
+" ================================================================
+
+
+let g:mkdp_path_to_chrome = "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
+
+" 设置 chrome 浏览器的路径（或是启动 chrome（或其他现代浏览器）的命令）
+" 如果设置了该参数, g:mkdp_browserfunc 将被忽略
+
+let g:mkdp_browserfunc = 'MKDP_browserfunc_default'
+" vim 回调函数, 参数为要打开的 url
+
+let g:mkdp_auto_start = 0
+" 设置为 1 可以在打开 markdown 文件的时候自动打开浏览器预览，只在打开
+" markdown 文件的时候打开一次
+
+let g:mkdp_auto_open = 0
+" 设置为 1 在编辑 markdown 的时候检查预览窗口是否已经打开，否则自动打开预
+" 览窗口
+
+let g:mkdp_auto_close = 1
+" 在切换 buffer 的时候自动关闭预览窗口，设置为 0 则在切换 buffer 的时候不
+" 自动关闭预览窗口
+
+let g:mkdp_refresh_slow = 0
+" 设置为 1 则只有在保存文件，或退出插入模式的时候更新预览，默认为 0，实时
+" 更新预览
+
+let g:mkdp_command_for_global = 0
+" 设置为 1 则所有文件都可以使用 MarkdownPreview 进行预览，默认只有 markdown
+" 文件可以使用改命令
+
+let g:mkdp_open_to_the_world = 0
+" 设置为 1, 在使用的网络中的其他计算机也能访问预览页面
+" 默认只监听本地（127.0.0.1），其他计算机不能访问
+
+
+nmap <silent> <F8> <Plug>MarkdownPreview
+imap <silent> <F8> <Plug>MarkdownPreview
+nmap <silent> <F9> <Plug>MarkdownPreviewStop
+imap <silent> <F9> <Plug>MarkdownPreviewStop
+" ------------------------- end -----------------------------------
+
+
+" ================================================================
+" *             Taglist plugins paramters                        *
+" ================================================================
+map <silent> T :TagbarOpenAutoClose<CR>
+" ------------------------- end -----------------------------------
+
+
+" ================================================================
+" *             ale plugins paramters                            *
+" ================================================================
+let b:ale_linters = ['pylint']
+let b:ale_fixers = ['autopep8', 'yapf']
+" ------------------------- end -----------------------------------
+
+
+" ================================================================
+" *             You Complete ME plugins paramters                *
+" ================================================================
+let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_autoclose_preview_window_after_insertion=1
+let g:ycm_use_clangd = 0
+let g:ycm_python_binary_path = '/usr/local/bin/python3'
+let g:ycm_python_interpreter_path = '/usr/local/bin/python3'
+let g:pydiction_location = '/Users/apple/.vim/bundle/Pydiction/complete-dict'
+let g:pydiction_menu_height = 20
+let g:pydiction_menu_width = 210
+nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap g/ :YcmCompleter GetDoc<CR>
+nnoremap gt :YcmCompleter GetType<CR>
+nnoremap gr :YcmCompleter GoToReferences<CR>
+" ------------------------- end -----------------------------------
+
+
+
+" ================================================================
+" *             NERDTree plugins paramters                       *
+" ================================================================
+let NERDTreeIgnore=['__pycache__', '\.pyc$', '\~$'] "ignore files in NERDTree
+let NERDTreeWinPos='left'
+let NERDTreeWinSize=30
+let NERDTreeMapOpenExpl = ""
+let NERDTreeMapUpdir = ""
+let NERDTreeMapUpdirKeepOpen = "l"
+let NERDTreeMapOpenSplit = ""
+let NERDTreeOpenVSplit = ""
+let NERDTreeMapActivateNode = "i"
+let NERDTreeMapOpenInTab = "o"
+let NERDTreeMapPreview = ""
+let NERDTreeMapCloseDir = "n"
+let NERDTreeMapChangeRoot = "y"
+map <F2> :NERDTreeToggle<CR>
+" ------------------------- end -----------------------------------
+
+
+
+" ================================================================
+" *             NERDTree git plugins paramters                   *
+" ================================================================
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
+" ------------------------- end -----------------------------------
+
+
+
+" ================================================================
+" *             python typescript paramters                      *
+" ================================================================
+let g:pymode_python = 'python3'
+autocmd VimEnter *.py python3 sys.path.append('.')
+autocmd BufWritePost *.py call Flake8()
+
+" using flake8 as a python syntax checker 
+let g:syntastic_python_checkers=['flake8']
+let g:flake8_cmd="/Library/Frameworks/Python.framework/Versions/3.6/bin/flake8"
+let g:syntastic_python_flake8_args='--ignore=E501,E225'
+
+let g:autopep8_aggressive=2
+
+let g:SuperTabDefaultCompletionType = "context"  
+
+let g:jedi#goto_command = "-d"
+let g:jedi#goto_assignments_command = "-g"
+let g:jedi#goto_definitions_command = "-e"
+let g:jedi#documentation_command = "-k"
+let g:jedi#usages_command = "-n"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#rename_command = "-r"
+
+let g:jedi#completions_enabled = 1
+let g:jedi#popup_on_dot = 1 
+let g:jedi#show_call_signatures = "1"
+
+" let g:jedi#force_py_version=3
+" let g:jedi#smart_auto_mappings = 0
+
+" it would be nice to set tag files by the active virtualenv here
+" :set tags=~/mytags "tags for ctags and taglist
+" omnicomplete
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+" Number of spaces that a pre-existing tab is equal to.
+au BufRead,BufNewFile *py,*pyw,*.c,*.h,*.md set tabstop=4
+
+" spaces for indents
+au BufRead,BufNewFile *.py,*pyw,*.md set shiftwidth=4
+au BufRead,BufNewFile *.py,*.pyw,*.md set expandtab
+au BufRead,BufNewFile *.py,*.md set softtabstop=4
+
+" Use the below highlight group when displaying bad whitespace is dicrid.
+highlight BadWhitespace ctermbg=red guibg=red
+
+" Display tabs at the beginning of a line in Python mode as bad.
+au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
+" Make trailing whitespace be flagged as bad.
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+
+" Wrap text after a certain number of characters
+au BufRead,BufNewFile *.py,*.pyw, set textwidth=100
+
+" Use UNIX (\n) line endings.
+au BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix
+
+" Set the default file encoding to UTF-8:
+set encoding=utf-8
+
+" For full syntax highlighting:
+let python_highlight_all=1
+syntax on
+
+" Keep indentation level from previous line:
+autocmd FileType python set autoindent
+
+" make backspaces more powerfull
+set backspace=indent,eol,start
+
+"Folding based on indentation:
+autocmd FileType python set foldmethod=indent
+"use space to open folds
+nnoremap <space> za 
+
+" js stuff
+autocmd FileType javascript setlocal shiftwidth=4 tabstop=4 expandtab
+
+" ------------------------- end -----------------------------------
+
+
+
+" ================================================================
+" *              vim typescript paramters                        *
+" ================================================================
+au BufRead,BufNewFile *.ts,*.tsx set tabstop=4
+
+" spaces for indents
+au BufRead,BufNewFile *.ts,*.tsx set shiftwidth=4
+au BufRead,BufNewFile *.ts,*.tsx set expandtab
+au BufRead,BufNewFile *.ts,*.tsx set softtabstop=4
+
+" ------------------------- end -----------------------------------
+
+
+" ================================================================
+" *              other paramters                                 *
+" ================================================================
+" I don't like swap files
+set clipboard=unnamed
+
+" set laststatus=2
+" let g:Powerline_symbols='unicode'
+
