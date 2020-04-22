@@ -1,0 +1,83 @@
+@startuml
+frame 账号管理 {
+storage 账号
+}
+
+
+
+frame 合伙人 {
+storage 实名认证
+storage 个人信息
+
+实名认证 ..> 个人信息
+}
+
+
+
+frame 设备管理 {
+storage 设备
+storage 商户
+storage 流水
+
+设备 ..> 商户
+商户 ..> 流水
+}
+
+
+
+frame 订单管理 {
+storage 订单
+storage 需求快照
+storage 支付凭证
+storage 物流信息
+storage 退款补货
+
+订单 ..> 需求快照
+订单 ..> 支付凭证
+订单 ..> 物流信息
+订单 ..> 退款补货
+}
+
+
+frame 库存管理 {
+storage 产品
+storage 商品
+
+产品 ..> 商品
+}
+
+
+frame 结算管理 {
+storage 政策
+storage 结算凭证
+
+政策 ..> 结算凭证
+}
+
+
+frame 账务管理 {
+storage 入账单
+storage 出账单
+storage 账务
+
+入账单 ..> 账务
+账务 ..> 出账单
+}
+
+
+
+个人信息 -[#blue]-> 账号: 生成
+个人信息 -[#blue]-> 订单: 生成
+商品 -[#blue]-> 订单: 依赖
+物流信息 -[#blue]-> 设备: 发货
+政策 -[#blue]-> 设备: 绑定
+设备 -[#blue]-> 结算凭证: 计算
+流水 -[#blue]-> 结算凭证: 计算
+商户 -[#blue]-> 结算凭证: 计算
+结算凭证 -[#blue]-> 入账单: 对账
+个人信息 <-[#blue]- 设备: 归属
+政策 -[#blue]-> 产品: 绑定
+订单 -[#blue]-> 出账单
+账务 -[#blud]-> 个人信息
+
+@enduml

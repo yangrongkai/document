@@ -1,0 +1,82 @@
+@startuml
+hide footbox
+title 用户登录时序图
+
+actor User as U
+participant Server as S
+
+
+U -> S: user.account.login(用户登录)
+note left
+参数
+username: # 用户名
+password: # 密码
+
+返回
+access_token: # 访问凭证
+renew_flag: # 续签凭证
+expirt_time: # 到期时间
+end note
+
+
+U -> S: user.get(用户信息获取)
+note right
+参数
+access_token: # 访问凭证
+
+返回
+name: # 用户名称
+gender: # 用户性别
+age: # 用户年龄
+address: # 地址
+permission: # 权限
+end note
+
+U -> S: user.update(用户信息)
+note left
+参数
+access_token: # 访问凭证
+update_info: # 更新信息 
+    name: # 用户名称
+    gender: # 用户性别
+    age: # 用户年龄
+    address: # 地址
+    permission: # 权限
+
+无返回
+end note
+
+
+U -> S: user.token.renew (用户凭证续签)
+note right
+参数
+access_token: # 访问凭证
+renew_flag: # 续签凭证
+
+返回
+access_token: #  访问凭证
+renew_flag: #  续签凭证
+expirt_time: #  到期时间
+end note
+
+
+U -> S: user.account.reset(密码重置)
+note left
+参数
+access_token: # 访问凭证
+old_password: # 老密码
+
+无返回
+end note
+
+
+
+U -> S: user.account.logout(用户退出注销)
+note right
+参数
+access_token: # 访问凭证
+
+无返回
+end note
+
+@enduml

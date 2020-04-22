@@ -1,0 +1,72 @@
+@startuml
+class 入账单 {
+    Integer 入账ID
+    Integer 合伙人ID
+    Integer 应入账金额
+    Integer 实入账金额
+    Datetime 应入账时间
+    Datetime 实际账时间
+    String 入账状态（入账中，已入账，入账失败）
+    String 来源（结算、订单、奖励、其他）
+    Integer 来源ID
+    Integer 账务ID
+    String 备注
+    Datetime 更新时间
+    Datetime 创建时间
+}
+
+class 出账单 {
+    Integer 出账ID
+    Integer 合伙人ID
+    Integer 应出账金额
+    Integer 实出账金额
+    Datetime 应出账时间
+    Datetime 实出账时间
+    String 出账状态（出账中，已出账，出账失败）
+    String 来源（提现、站内支付、其他）
+    Integer 来源ID
+    Integer 账务ID
+    String 备注
+    Datetime 更新时间
+    Datetime 创建时间
+}
+
+class 账务 {
+    Integer 账务ID
+    Integer 合伙人ID
+    Integer 金额(入账、出账金额，有正有负)
+    String 类型（入账、出账）
+    Integer 来源ID
+    String 备注
+    Datetime 创建时间
+}
+note top
+余额：余额是所有账务的总累计累加和
+账务：一种历史的记录，不存在修改，入账单及出账单仅仅是一种入账前的凭证
+规范：账务只与入账单和出账单有关系
+end note
+
+class 审核事件 {
+    Integer 审核ID
+    Integer 合伙人ID
+    Integer 员工ID(审核人)
+    String 快照内容
+    String 审核类型（入账单、出账单、其他）
+    Integer 审核对象ID
+    String 审核状态（通过、失败）
+    Datetime 创建时间
+}
+note top
+审核事件：记录员工对入账单或出账单的干预操作,用于员工绩效使用。
+可以有两种实现形式：
+实现一：分别创建入账审核事件表和出账审核事件表
+实现二：通过状态机来定义审核事件，通过一个审核表来总控入账审核和出账审核等类型。
+end note
+
+
+账务 <..> 入账单 : 双重绑定
+账务 <..> 出账单 : 双重绑定
+审核事件 ..> 入账单 : 绑定
+审核事件 ..> 出账单 : 绑定
+
+@enduml
