@@ -66,10 +66,6 @@ storage 结算凭证
 }
 
 
-frame 三层建筑 #red {
-storage 入账单
-storage 出账单
-}
 
 frame 余额管理 {
 storage 余额
@@ -84,6 +80,21 @@ frame 账务管理 {
 storage 交易记录
 }
 
+
+frame 工作流 #red {
+storage 入账单
+storage 出账单
+}
+
+
+frame 事件管理 #red {
+storage 实名事件
+storage 发货事件
+storage 补货事件
+storage 退款事件
+storage 入账审核事件
+storage 出账审核事件
+}
 
 
 个人信息 -[#blue]-> 账号: 生成
@@ -105,5 +116,12 @@ storage 交易记录
 充值记录 -[#blue]-> 交易记录: 同步
 入账单 --> 充值记录
 提现记录 --> 出账单
+
+实名认证 <.[#green]. 实名事件: 生成
+发货事件 <.[#green]. 物流信息: 生成
+退款事件 <.[#green]. 退款补货: 生成
+补货事件 <.[#green]. 退款补货: 生成
+入账审核事件 <.[#green]. 入账单: 审核
+出账审核事件 <.[#green]. 出账单: 审核
 
 @enduml

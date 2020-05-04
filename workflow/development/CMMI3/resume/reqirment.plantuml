@@ -1,0 +1,107 @@
+@startuml
+
+skinparam rectangle<<behavior>> {
+	roundCorner 25
+}
+sprite $bProcess jar:archimate/business-process
+sprite $aService jar:archimate/application-service
+sprite $aComponent jar:archimate/application-component
+
+
+rectangle "需求设计"  as RD <<$bProcess>><<behavior>> #Business
+rectangle "1. 需求调研"  as RS <<$bProcess>><<behavior>> #Business
+rectangle "2. 需求分析" as RA <<$bProcess>><<behavior>> #Business
+rectangle "3. 框架定义" as FD <<$bProcess>><<behavior>> #Business
+rectangle "4. 功能元素定义" as DE <<$bProcess>><<behavior>> #Business
+rectangle "5. 设计稿交付" as DD <<$bProcess>><<behavior>> #Business
+
+
+RD *-down- RS
+RD *-down- RA
+RD *-down- FD
+RD *-down- DE
+RD *-down- DD
+
+RS -right->> RA
+RA -right->> FD
+FD -right->> DE
+DE -right->> DD
+
+
+
+
+package "1. 需求调研" #DDDDDD {
+	rectangle "原则：\n  1.判断需求正确性。\n  2.评估需求价值及优先级。" as RDR <<$aService>><<behavior>> #Application
+	rectangle "输入\n  1.需求登记表。\n  2.素材收集列表。\n\n输出\n  1.需求列表" as RDIO <<$aService>><<behavior>>  #Application
+	rectangle "工具\n 1.数据收集能力。\n  2.数据处理能力。" as RDT <<$aService>><<behavior>>  #Application
+
+	RDR .up.|> RS
+	RDIO .up.|> RDR
+	RDT .up.|> RDIO
+}
+
+
+
+
+package "2. 需求分析" #DDDDDD {
+	rectangle "原则：\n  1.分析出流程。\n  2.编排好用户故事。 \n  3.确认角色。" as RAR <<$aService>><<behavior>> #Application
+	rectangle "输入\n  1.需求列表。\n\n输出\n  1.用户故事。\n  2. SRS（软件需求说明书）。" as RAIO <<$aService>><<behavior>>  #Application
+	rectangle "工具\n 1.流程图。\n  2.用例图。\n  3.泳道图。" as RAT <<$aService>><<behavior>>  #Application
+
+	RAR .up.|> RA
+	RAIO .up.|> RAR
+	RAT .up.|> RAIO
+}
+
+
+
+package "3. 框架定义" #DDDDDD {
+	rectangle "原则：\n  1.分析数据源实体。\n  2.分析工作流。\n  3.分析事件" as FDR <<$aService>><<behavior>> #Application
+	rectangle "输入\n  1.用户故事。\n  2.SRS（软件需求说明书）。\n\n输出\n  1.线框图（粗）。 " as FDIO <<$aService>><<behavior>>  #Application
+	rectangle "工具\n 1.思维导图。\n 2.实体图。\n  3.类图。" as FDT <<$aService>><<behavior>>  #Application
+
+	FDR .up.|> FD
+	FDIO .up.|> FDR
+	FDT .up.|> FDIO
+}
+
+
+
+
+package "4. 功能元素定义" #DDDDDD {
+	rectangle "原则：\n  1.定义实体。\n  2.定义元素。\n  3.做好分类" as DER <<$aService>><<behavior>> #Application
+	rectangle "输入\n  1.用户故事。\n  2.SRS（软件需求说明书）。\n  3.线框图（粗）。\n\n输出\n  1.线框图（精）。 " as DEIO <<$aService>><<behavior>>  #Application
+	rectangle "工具\n 1.思维导图。\n 2.实体图。\n  3.类图。" as DET <<$aService>><<behavior>>  #Application
+
+	DER .up.|> DE
+	DEIO .up.|> DER
+	DET .up.|> DEIO
+}
+
+
+
+
+package "5. 设计稿交付" #DDDDDD {
+	rectangle "原则：\n  1.考虑易用。\n  2.设计交互。\n  3.设计排版。" as DDR <<$aService>><<behavior>> #Application
+	rectangle "输入\n  1.用户故事。\n  2.SRS（软件需求说明书）。\n  3. 线框图（精）\n\n输出\n  1.高保真图。 " as DDIO <<$aService>><<behavior>>  #Application
+	rectangle "工具\n 1.行业模板。 \n  2.绘图组件。" as DDT <<$aService>><<behavior>>  #Application
+
+	DDR .up.|> DD
+	DDIO .up.|> DDR
+	DDT .up.|> DDIO
+}
+
+
+
+
+legend left
+Example from the "Archisurance case study" (OpenGroup).
+See
+==
+<$bProcess> :business process
+==
+<$aService> : application service
+==
+<$aComponent> : application component
+endlegend
+@enduml
